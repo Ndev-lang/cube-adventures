@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/pass/3.png" type="Texture" id=5]
 [ext_resource path="res://assets/pass/7.png" type="Texture" id=6]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ) ],
 "loop": true,
@@ -20,7 +20,7 @@ animations = [ {
 "speed": 2.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 58.4289, 69.4559 )
 
 [node name="wife" type="Area2D"]
@@ -30,12 +30,12 @@ script = ExtResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -17.6389, 0 )
 scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 2 )
+frames = SubResource( 1 )
 animation = "wife1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -47.6113, -9.79297 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0

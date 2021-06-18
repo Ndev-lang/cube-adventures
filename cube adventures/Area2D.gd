@@ -12,4 +12,4 @@ func _on_Area2D_body_entered(body):
 
 
 func _on_Timer_timeout():
-	get_tree().change_scene("res://level2.tscn")
+	get_tree().change_scene("res://wingame.tscn")
