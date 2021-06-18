@@ -1,0 +1,245 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://word_tile_set.tres" type="TileSet" id=1]
+[ext_resource path="res://cubin.tscn" type="PackedScene" id=2]
+[ext_resource path="res://passtrue_tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://assets/background/1.png" type="Texture" id=4]
+[ext_resource path="res://assets/background/2.png" type="Texture" id=5]
+[ext_resource path="res://assets/background/4.png" type="Texture" id=6]
+[ext_resource path="res://coin.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/coin/1.png" type="Texture" id=8]
+[ext_resource path="res://assets/font/Roboto-BoldItalic.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://HUD.gd" type="Script" id=10]
+[ext_resource path="res://enemy.tscn" type="PackedScene" id=11]
+[ext_resource path="res://passstage.tscn" type="PackedScene" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 31.4312, 491.023 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 9121.34, 27.4246 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.333333, 0.333333, 0.333333, 0.392157 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="DynamicFont" id=4]
+size = 35
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=5]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 9 )
+
+[node name="level1" type="Node2D"]
+
+[node name="tiles on way" type="TileMap" parent="."]
+position = Vector2( 291.202, 560.089 )
+scale = Vector2( 0.8, 0.8 )
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 64, 56 )
+collision_layer = 2
+collision_mask = 49
+format = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="tiles on way"]
+position = Vector2( 235.451, 37.8403 )
+collision_layer = 2147483650
+collision_mask = 49
+
+[node name="platform1" type="CollisionShape2D" parent="tiles on way/StaticBody2D"]
+position = Vector2( -596.093, -248.356 )
+shape = SubResource( 1 )
+
+[node name="tiles solid" type="TileMap" parent="."]
+position = Vector2( 251.917, 563.8 )
+scale = Vector2( 0.8, 0.8 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 125, 125 )
+collision_layer = 2
+collision_mask = 49
+format = 1
+tile_data = PoolIntArray( 327688, 1, 0, 327689, 1, 0, 524294, 1, 0, 524299, 1, 0, 524304, 1, 0, 524305, 1, 0, 524309, 1, 0, 720892, 0, 0, 720893, 1, 0, 720894, 1, 0, 720895, 1, 0, 655360, 1, 0, 655361, 1, 0, 655362, 1, 0, 655363, 2, 0, 655365, 1, 0 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="blue sky" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 2944, 1663.35 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/blue sky"]
+position = Vector2( 0.681793, 0.840897 )
+scale = Vector2( 2.3, 2.315 )
+texture = ExtResource( 4 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="nearby blocks" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.5, 0.5 )
+motion_mirroring = Vector2( 2300, 1300 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/nearby blocks"]
+scale = Vector2( 1.75, 1.75 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="midle blocks" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.7, 0.7 )
+motion_mirroring = Vector2( 2300, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/midle blocks"]
+scale = Vector2( 1.85937, 2.11489 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="fallzone" type="Area2D" parent="."]
+position = Vector2( 16960, 1702 )
+scale = Vector2( 1.85937, 2.11489 )
+collision_layer = 4
+collision_mask = 2147483649
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fallzone"]
+position = Vector2( 0, 9.92957 )
+shape = SubResource( 2 )
+
+[node name="coins" type="Node2D" parent="."]
+position = Vector2( 2048, 1280 )
+scale = Vector2( 0.8, 0.8 )
+
+[node name="coin" parent="coins" instance=ExtResource( 7 )]
+position = Vector2( -1753.88, -950.472 )
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="enemy" parent="enemies" instance=ExtResource( 11 )]
+position = Vector2( 1952, 1248 )
+
+[node name="enemy2" parent="enemies" instance=ExtResource( 11 )]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 1152, 928 )
+speed = 350
+
+[node name="enemy3" parent="enemies" instance=ExtResource( 11 )]
+modulate = Color( 0.14902, 1, 0, 1 )
+position = Vector2( 2400, 1184 )
+speed = 40
+detects_cliffs = false
+
+[node name="Area2D" parent="." instance=ExtResource( 12 )]
+position = Vector2( 12416, 1504 )
+
+[node name="Camera2D2" type="Camera2D" parent="Area2D"]
+position = Vector2( -553.676, 6.82501 )
+current = true
+zoom = Vector2( 1.5, 1.5 )
+limit_left = 1
+limit_top = 27
+limit_right = 14245
+limit_bottom = 1660
+limit_smoothed = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+drag_margin_left = 0.3
+drag_margin_right = 0.3
+drag_margin_bottom = 0.1
+editor_draw_limits = true
+
+[node name="cubin" parent="." instance=ExtResource( 2 )]
+position = Vector2( 224, 1408 )
+collision_mask = 30
+
+[node name="Camera2D" type="Camera2D" parent="cubin"]
+current = true
+zoom = Vector2( 1.5, 1.5 )
+limit_left = 1
+limit_top = 27
+limit_right = 14245
+limit_bottom = 1660
+limit_smoothed = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+drag_margin_left = 0.3
+drag_margin_right = 0.3
+drag_margin_bottom = 0.1
+editor_draw_limits = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource( 10 )
+
+[node name="Panel" type="Panel" parent="HUD"]
+margin_left = 15.1631
+margin_top = 38.7348
+margin_right = 171.163
+margin_bottom = 98.7348
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="HUD"]
+margin_left = 21.8566
+margin_top = 41.3058
+margin_right = 85.8566
+margin_bottom = 105.306
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="=" type="Label" parent="HUD"]
+margin_left = 66.9736
+margin_top = 50.7348
+margin_right = 123.974
+margin_bottom = 92.7348
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.639216, 0.639216, 0.639216, 1 )
+text = "="
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="coins" type="Label" parent="HUD"]
+margin_left = 110.163
+margin_top = 51.7348
+margin_right = 170.163
+margin_bottom = 94.7348
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.639216, 0.639216, 0.639216, 1 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fps" type="Label" parent="HUD"]
+margin_left = 8.49829
+margin_top = 686.014
+margin_right = 155.498
+margin_bottom = 705.014
+custom_fonts/font = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="body_entered" from="fallzone" to="cubin" method="_on_fallzone_body_entered"]
+[connection signal="coin_collected" from="coins/coin" to="HUD" method="_on_coin_collected"]
+[connection signal="stage" from="Area2D" to="cubin" method="_on_Area2D_stage"]

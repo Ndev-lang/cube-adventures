@@ -1,0 +1,31 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=2]
+
+[ext_resource path="res://assets/player/3.png" type="Texture" id=1]
+[ext_resource path="res://assets/player/2.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/6.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/5.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/4.png" type="Texture" id=5]
+[ext_resource path="res://assets/player/1.png" type="Texture" id=6]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "clim",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "air",
+"speed": 5.0
+} ]
